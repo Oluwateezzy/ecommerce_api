@@ -32,7 +32,8 @@ const updateUser = async(req, res) => {
         throw new CustomError.BadRequestError("Please provide all values");
     }
 
-    const user = await User.findOne({ _id: req.user.userId });
+    const user = await User.findOne({ _id: req.user.userid });
+    // res.json(user);
 
     user.email = email;
     user.name = name;
