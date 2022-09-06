@@ -20,6 +20,8 @@ const attachCookieToResponse = ({ res, user }) => {
         secure: process.env.NODE_ENV === "production",
         signed: true,
     });
+
+    console.log(res.cookie);
 };
 
 module.exports = {
