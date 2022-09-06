@@ -4,7 +4,7 @@ const CustomError = require("../errors");
 const {
     createTokenUser,
     attachCookieToResponse,
-    checkPermission,
+    checkPermissions,
 } = require("../utils");
 
 const getAllUsers = async(req, res) => {
@@ -19,7 +19,7 @@ const getSingleUser = async(req, res) => {
         throw new CustomError.NotFoundError(`No user with id : ${req.params.id}`);
     }
     checkPermissions(req.user, user._id);
-    res.status(StatusCodes.OK).json({ user: req.user });
+    res.status(StatusCodes.OK).json({ user: user });
 };
 
 const showCurrentUser = async(req, res) => {
@@ -52,7 +52,7 @@ const updateUserPassword = async(req, res) => {
         throw new CustomError.BadRequestError("Please provide both values");
     }
 
-    const user = await User.findOne({ _id: req.user.userId });
+    const user = await User.findOne({ _id: req.user.userid });
 
     const ispasswordCorrect = user.comparePassword(oldPassword);
 
