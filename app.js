@@ -20,6 +20,8 @@ const connectDB = require("./db/connect");
 //router
 const userRouter = require("./routes/userRoutes");
 const authRouter = require("./routes/authRoutes");
+const productRouter = require("./routes/productRoutes");
+const OrderRouter = require("./routes/OrderRoutes");
 
 // middleware
 const notFoundMiddleware = require("./middleware/not-found");
@@ -46,7 +48,9 @@ app.use(fileUpload());
 
 // routes
 app.use("/api/v1/users", userRouter);
-app.use("/api/v1", authRouter);
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/products", productRouter);
+app.use("/api/v1/orders", OrderRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
